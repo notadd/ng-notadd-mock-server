@@ -1,5 +1,5 @@
 import express from 'express';
-import { graphqlExpress,graphiqlExpress } from 'apollo-server-express';
+import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import bodyParser from 'body-parser';
 
 import * as Schema from './schema';
@@ -31,25 +31,13 @@ server.use('/graphql', bodyParser.json(), graphqlExpress(async (request) => {
         schema: await schema,
         rootValue,
         context,
-        tracing: true,
+        tracing: false,
     };
 }));
 
 server.use('/graphiql', graphiqlExpress({
     endpointURL: '/graphql',
-    query: `
-		# Welcome to GraphiQL
-
-		query PostsForAuthor {
-			author(id: 1) {
-				firstName
-				posts {
-				title
-				votes
-				}
-			}
-		}
-	`,
+    query: `# Welcome to GraphiQL`,
 }));
 
 server.listen(PORT, () => {

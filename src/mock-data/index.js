@@ -1,7 +1,5 @@
-import { posts } from "./posts";
-import { authors } from "./authors";
+import { widgets } from "./analytics";
 
 export {
-    posts,
-    authors
+    widgets
 }

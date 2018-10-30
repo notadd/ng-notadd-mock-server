@@ -1,15 +1,11 @@
-import { Author } from './author.graphql';
-import { Person } from './person.graphql';
+import { Widget } from "./analysis.graphql";
 
-import { Query } from './query.graphql';
-import { Mutaion } from './mutation.graphql';
+import { Query } from "./query.graphql";
 
-let typeDefs = `
-    ${Author}
-    ${Person}
+const typeDefs = `
+    ${Widget},
 
     ${Query}
-    ${Mutaion}
 `;
 
 export {
