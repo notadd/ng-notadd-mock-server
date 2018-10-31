@@ -1,12 +1,22 @@
 import express from 'express';
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
-import bodyParser from 'body-parser';
 
-import * as Schema from './schema';
+import SERVER from './schema';
 
-let schema;
 const PORT = 3000;
-const server = express();
+const APP = express();
+
+// Middleware: GraphQL
+SERVER.applyMiddleware({
+    app: APP
+});
+
+// Express: Listener
+APP.listen(PORT, () => {
+    console.log(`The server has started on port: ${PORT}`);
+    console.log(`http://localhost:${PORT}/graphql`);
+});
+
+/* 
 const schemaFunction = Schema.schemaFunction || (() => Schema.schema);
 const rootFunction = Schema.rootFunction || (() => schema.rootValue);
 const contextFunction = Schema.context || ((headers, secrets) => Object.assign({ headers }, secrets));
@@ -43,4 +53,4 @@ server.use('/graphiql', graphiqlExpress({
 server.listen(PORT, () => {
     console.log(`GraphQL Server is now running on http://localhost:${PORT}/graphql`);
     console.log(`View GraphiQL at http://localhost:${PORT}/graphiql`);
-});
+}); */

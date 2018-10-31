@@ -1,17 +1,25 @@
 // This example demonstrates a simple server with some
 // Read the complete docs for graphql-tools here:
 // http://dev.apollodata.com/tools/graphql-tools/generate-schema.html
+import { ApolloServer } from 'apollo-server-express';
 
-import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
-
+// Imports: GraphQL TypeDefs & Resolvers & Mocks
 import { typeDefs } from './graphql/graphqls';
 import { resolvers } from './graphql/resolvers';
 import { mocks } from './graphql/mocks';
 
-export const schema = makeExecutableSchema({
+const SERVER = new ApolloServer({
     typeDefs,
-    resolvers
+    resolvers,
+    mocks,
+    mockEntireSchema: false,
+    playground: {
+        endpoint: `http://localhost:3000/graphql`,
+        settings: {
+            'editor.theme': 'dark'
+        }
+    }
 });
 
-// This function call adds the mocks to your schema!
-addMockFunctionsToSchema({ schema, mocks, preserveResolvers: true });
+// Exports
+export default SERVER;
