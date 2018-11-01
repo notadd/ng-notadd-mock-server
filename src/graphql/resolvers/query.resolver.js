@@ -1,8 +1,10 @@
 import { find,filter } from 'lodash';
-import { widgets } from '../../mock-data';
+import { widgets, baseIcon, mdiIcon } from '../../mock-data';
 
 export const queryResolver = {
     Query: {
-        widgets: () => widgets
+        widgets: () => widgets,
+        baseIcon: () => baseIcon,
+        mdiIcons: () => mdiIcon.icons
     }
 };
