@@ -3,6 +3,7 @@ export const Query = `
     type Query {
         widgets: [ Widget ],
         baseIcon: BaseIcon,
-        mdiIcons: [ MDIIcon ]
+        mdiIcons: [ MDIIcon ],
+        login(userName: String, password: String, token: String!): Login 
     }
 `;
