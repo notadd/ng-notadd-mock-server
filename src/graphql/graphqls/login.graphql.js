@@ -1,5 +1,6 @@
 export const Login = `
     type Login {
-        code: String
+        validatedUser: Boolean
+        errorCodes: [String]
     }
 `;

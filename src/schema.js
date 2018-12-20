@@ -14,7 +14,7 @@ const SERVER = new ApolloServer({
     mocks,
     mockEntireSchema: false,
     context: ({ req }) => ({
-        request: req.headers['x-forwarded-for']
+        ip: req.headers['x-forwarded-for'] || req.ip
     }),
     playground: {
         endpoint: `http://localhost:3000/graphql`,

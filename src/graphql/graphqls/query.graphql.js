@@ -4,6 +4,6 @@ export const Query = `
         widgets: [ Widget ],
         baseIcon: BaseIcon,
         mdiIcons: [ MDIIcon ],
-        login(userName: String, password: String, token: String!): Login 
+        login(userName: String!, password: String!, email: String!, token: String!): Login 
     }
 `;

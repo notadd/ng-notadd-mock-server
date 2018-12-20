@@ -7,17 +7,28 @@ export const queryResolver = {
         widgets: () => widgets,
         baseIcon: () => baseIcon,
         mdiIcons: () => mdiIcon.icons,
-        login: (obj, args, context, info) => {
-            return { code: context.request || '没有获取到ip'}
-            /* rp({
+        login: async (obj, args, context, info) => {
+            let rpResponse = await rp({
                 uri: 'https://www.google.com/recaptcha/api/siteverify',
                 qs: {
                     secret: '6Lf4g4EUAAAAADUccKXW6ULDAKqj7hmk118fZtPY',
-                    response: args.token
+                    response: args.token,
+                    remoteip: context.ip
                 }
-            }).then(res => {
-                console.log(res);
-            }); */
+            });
+            rpResponse = JSON.parse(rpResponse);
+
+            let validatedUser = false;
+            let errorCodes = [];
+            if (rpResponse.success) {
+                validatedUser = rpResponse.score > 0.5;
+            } else {
+                errorCodes = rpResponse["error-codes"];
+            }
+            return {
+                validatedUser,
+                errorCodes
+            }
         }
     }
 };
